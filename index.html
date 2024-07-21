@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer 2024 Trip - Coming Soon</title>
+    <title>Summer 2024 Trip - Trip Tracker Coming Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -45,7 +45,7 @@
             min-width: 60px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 600px) and (orientation: portrait) {
             h1 {
                 font-size: 2em;
             }
@@ -60,6 +60,29 @@
             .countdown div {
                 min-width: auto;
                 padding: 8px;
+            }
+        }
+
+        @media (min-width: 601px) or (orientation: landscape) {
+            body {
+                background: url('hawaii-background.jpg') no-repeat center center/cover;
+            }
+            .container {
+                width: 80%;
+                max-width: 800px;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1.5em;
+            }
+            .countdown {
+                font-size: 2em;
+            }
+            .countdown div {
+                padding: 15px;
+                min-width: 80px;
             }
         }
     </style>
