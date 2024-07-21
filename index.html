@@ -21,25 +21,46 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
         }
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             margin: 0;
         }
         p {
-            font-size: 1.5em;
+            font-size: 1.2em;
             margin: 20px 0;
         }
         .countdown {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 2em;
+            justify-content: space-around;
+            gap: 10px;
+            font-size: 1.5em;
         }
         .countdown div {
             background: rgba(255, 255, 255, 0.2);
             padding: 10px;
             border-radius: 10px;
+            min-width: 60px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .countdown {
+                font-size: 1.2em;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .countdown div {
+                min-width: auto;
+                padding: 8px;
+            }
         }
     </style>
 </head>
