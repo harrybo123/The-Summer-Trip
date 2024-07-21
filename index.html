@@ -16,6 +16,7 @@
             background: url('hawaii-background.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
+            overflow: hidden; /* To prevent scrollbars during animation */
         }
         .container {
             background: rgba(0, 0, 0, 0.5);
@@ -23,7 +24,7 @@
             border-radius: 10px;
             width: 90%;
             max-width: 600px;
-            position: relative;
+            position: absolute;
         }
         h1 {
             font-size: 2.5em;
@@ -48,14 +49,24 @@
 
         @keyframes flyaround {
             0% { transform: translate(0, 0); }
-            25% { transform: translate(80vw, 0); }
-            50% { transform: translate(80vw, 80vh); }
-            75% { transform: translate(0, 80vh); }
+            25% { transform: translate(var(--x1), var(--y1)); }
+            50% { transform: translate(var(--x2), var(--y2)); }
+            75% { transform: translate(var(--x3), var(--y3)); }
             100% { transform: translate(0, 0); }
         }
 
         .flying {
-            animation: flyaround 1s linear infinite;
+            animation: flyaround 5s ease-in-out forwards;
+        }
+
+        .enlarge {
+            animation: enlarge 0.3s ease-in-out forwards;
+        }
+
+        @keyframes enlarge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
         }
 
         @media (max-width: 600px) and (orientation: portrait) {
@@ -135,10 +146,46 @@
 
         const interval = setInterval(countdown, 1000);
 
-        // Remove flying class after 5 seconds
-        setTimeout(() => {
-            document.getElementById('countdown-container').classList.remove('flying');
-        }, 5000);
+        // Function to generate random positions
+        const randomPosition = () => {
+            const x = Math.random() * 80 - 40; // Random value between -40% and 40%
+            const y = Math.random() * 80 - 40; // Random value between -40% and 40%
+            return { x: `${x}vw`, y: `${y}vh` };
+        };
+
+        // Apply random positions as CSS variables for the animation
+        const applyRandomPositions = () => {
+            const container = document.getElementById('countdown-container');
+            const pos1 = randomPosition();
+            const pos2 = randomPosition();
+            const pos3 = randomPosition();
+
+            container.style.setProperty('--x1', pos1.x);
+            container.style.setProperty('--y1', pos1.y);
+            container.style.setProperty('--x2', pos2.x);
+            container.style.setProperty('--y2', pos2.y);
+            container.style.setProperty('--x3', pos3.x);
+            container.style.setProperty('--y3', pos3.y);
+        };
+
+        // Run animation and remove class after 5 seconds
+        window.onload = () => {
+            applyRandomPositions();
+            const container = document.getElementById('countdown-container');
+            setTimeout(() => {
+                container.classList.remove('flying');
+                container.style.position = 'relative'; // Ensure it stays centered after animation
+            }, 5000);
+        };
+
+        // Click event to enlarge and shrink the countdown
+        document.getElementById('countdown-container').addEventListener('click', () => {
+            const container = document.getElementById('countdown-container');
+            container.classList.add('enlarge');
+            setTimeout(() => {
+                container.classList.remove('enlarge');
+            }, 300);
+        });
     </script>
 </body>
 </html>
