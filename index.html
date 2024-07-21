@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summer 2024 Trip - Trip Tracker Coming Soon</title>
+    <title>Summer 2024 Trip - Coming Soon</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -23,6 +23,7 @@
             border-radius: 10px;
             width: 90%;
             max-width: 600px;
+            position: relative;
         }
         h1 {
             font-size: 2.5em;
@@ -43,6 +44,18 @@
             padding: 10px;
             border-radius: 10px;
             min-width: 60px;
+        }
+
+        @keyframes flyaround {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(80vw, 0); }
+            50% { transform: translate(80vw, 80vh); }
+            75% { transform: translate(0, 80vh); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .flying {
+            animation: flyaround 1s linear infinite;
         }
 
         @media (max-width: 600px) and (orientation: portrait) {
@@ -88,7 +101,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container flying" id="countdown-container">
         <h1>Summer 2024 American/Hawaii Trip</h1>
         <p>Coming Soon</p>
         <div class="countdown">
@@ -121,7 +134,11 @@
         };
 
         const interval = setInterval(countdown, 1000);
+
+        // Remove flying class after 5 seconds
+        setTimeout(() => {
+            document.getElementById('countdown-container').classList.remove('flying');
+        }, 5000);
     </script>
 </body>
 </html>
-
