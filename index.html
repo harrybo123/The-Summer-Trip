@@ -3,40 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USA & Hawaii 2024 - Summer Trip Tracker</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Summer 2024 Trip - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('hawaii-background.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2em;
+        }
+        .countdown div {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>USA & Hawaii 2024 - Summer Trip Tracker</h1>
-    </header>
-    <main>
-        <div class="container">
-            <section id="quick-info">
-                <h2>Quick Info About Flights</h2>
-                <div id="quick-info-content"></div>
-            </section>
-            <section id="itinerary">
-                <h2>Today's Itinerary</h2>
-                <div id="itinerary-content"></div>
-            </section>
-            <section id="flights">
-                <h2>Upcoming Flights</h2>
-                <div id="flights-content"></div>
-            </section>
-            <section id="weather">
-                <h2>Current Weather</h2>
-                <div id="weather-content"></div>
-            </section>
-            <section id="nearby-activities">
-                <h2>Things to Do Nearby</h2>
-                <div id="activities-content"></div>
-            </section>
+    <div class="container">
+        <h1>Summer 2024 American/Hawaii Trip</h1>
+        <p>Coming Soon</p>
+        <div class="countdown">
+            <div><span id="days"></span> Days</div>
+            <div><span id="hours"></span> Hours</div>
+            <div><span id="minutes"></span> Minutes</div>
+            <div><span id="seconds"></span> Seconds</div>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Summer Trip Tracker</p>
-    </footer>
-    <script src="script.js"></script>
+    </div>
+    <script>
+        const countdown = () => {
+            const tripDate = new Date('August 9, 2024 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = tripDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.querySelector('.countdown').innerText = 'Trip has started!';
+            }
+        };
+
+        const interval = setInterval(countdown, 1000);
+    </script>
 </body>
 </html>
+
